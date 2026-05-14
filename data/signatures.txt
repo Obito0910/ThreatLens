@@ -1,0 +1,10 @@
+# signatures.txt
+# TODO: Add content
+# Known malware signatures database
+# Format: hash,malware_name
+
+deadbeef,TestMalware.A
+cafebabe,TrojanHorse.B
+12345678,Ransomware.C
+abcdef01,Backdoor.D
+11111111,Keylogger.E

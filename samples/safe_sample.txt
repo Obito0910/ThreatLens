@@ -1,0 +1,16 @@
+# safe_sample.txt
+# TODO: Add content
+
+
+This is a safe sample file for testing the malware analyzer.
+It contains normal text content without any suspicious patterns.
+
+The file is designed to test the analysis engine without triggering
+any malware detection signatures or suspicious string matches.
+
+File metadata:
+- Extension: .txt
+- Expected verdict: SAFE
+- Risk score: Should be low (0-20)
+
+This file is used for educational purposes in the OOP semester project.

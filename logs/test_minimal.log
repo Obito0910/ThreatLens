@@ -1,0 +1,16 @@
+[2026-05-13 19:04:58] [INFO] Logger initialized: logs/test_minimal.log
+
+========================================
+[2026-05-13 19:04:58] ANALYSIS COMPLETED
+========================================
+User:         test_user
+Role:         Analyst
+File:         safe_sample.txt
+Hash:         249abcb5
+Risk Score:   0/100
+Verdict:      SAFE
+Findings:     3
+Timestamp:    2026-05-13 19:04:58
+========================================
+
+[2026-05-13 19:04:58] [INFO] Logger shutting down

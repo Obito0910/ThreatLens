@@ -1,0 +1,545 @@
+2. Complete Project Folder Structure
+
+
+
+MalwareAnalyzer/
+├── include/
+│   ├── Core/
+│   │   ├── FileSample.h                 // File representation
+│   │   ├── AnalysisResult.h             // Analysis findings
+│   │   └── History.h                    // Template history tracker
+│   │
+│   ├── Analyzers/
+│   │   ├── Analyzer.h                   // Abstract base class
+│   │   ├── HashAnalyzer.h               // Hash computation
+│   │   ├── StringAnalyzer.h             // Suspicious string detection
+│   │   ├── SignatureAnalyzer.h          // Signature matching
+│   │   └── MetadataAnalyzer.h           // File metadata analysis
+│   │
+│   ├── Engine/
+│   │   ├── AnalysisEngine.h             // Orchestrates analysis
+│   │   ├── RiskScorer.h                 // Calculates risk score
+│   │   └── ScoringStrategy.h            // Strategy pattern for scoring
+│   │
+│   ├── Security/
+│   │   ├── User.h                       // User representation
+│   │   ├── AuthenticationManager.h      // Login/logout
+│   │   └── QuarantineManager.h          // Quarantine simulation
+│   │
+│   ├── Reporting/
+│   │   ├── ReportGenerator.h            // Report creation
+│   │   └── Logger.h                     // Activity logging
+│   │
+│   ├── Utils/
+│   │   ├── Exceptions.h                 // Custom exceptions
+│   │   ├── Utility.h                    // Template utilities
+│   │   └── ConfigurationManager.h       // Singleton config
+│   │
+│   └── UI/
+│       └── MenuSystem.h                 // Console menu
+│
+├── src/
+│   ├── Core/
+│   │   ├── FileSample.cpp
+│   │   ├── AnalysisResult.cpp
+│   │   └── History.cpp                  // Template implementation
+│   │
+│   ├── Analyzers/
+│   │   ├── Analyzer.cpp                 // Virtual destructor impl
+│   │   ├── HashAnalyzer.cpp
+│   │   ├── StringAnalyzer.cpp
+│   │   ├── SignatureAnalyzer.cpp
+│   │   └── MetadataAnalyzer.cpp
+│   │
+│   ├── Engine/
+│   │   ├── AnalysisEngine.cpp
+│   │   ├── RiskScorer.cpp
+│   │   ├── BasicScoring.cpp
+│   │   └── AdvancedScoring.cpp
+│   │
+│   ├── Security/
+│   │   ├── User.cpp
+│   │   ├── AuthenticationManager.cpp
+│   │   └── QuarantineManager.cpp
+│   │
+│   ├── Reporting/
+│   │   ├── ReportGenerator.cpp
+│   │   └── Logger.cpp
+│   │
+│   ├── Utils/
+│   │   ├── Exceptions.cpp
+│   │   ├── Utility.cpp
+│   │   └── ConfigurationManager.cpp
+│   │
+│   ├── UI/
+│   │   └── MenuSystem.cpp
+│   │
+│   └── main.cpp                         // Entry point
+│
+├── data/
+│   ├── config.txt                       // System configuration
+│   ├── signatures.txt                   // Malware signatures
+│   ├── users.txt                        // User credentials
+│   ├── suspicious_strings.txt           // Keyword database
+│   └── dangerous_extensions.txt         // Extension blacklist
+│
+├── samples/                             // Test files
+│   ├── safe_sample.txt
+│   ├── suspicious_sample.exe
+│   └── test_document.pdf
+│
+├── reports/                             // Generated reports
+│   └── .gitkeep
+│
+├── logs/                                // Activity logs
+│   ├── analysis.log
+│   └── quarantine.log
+│
+├── docs/
+│   ├── UML_Diagram.png
+│   ├── ClassDiagram.puml
+│   ├── ProjectReport.pdf
+│   └── Presentation.pptx
+│
+├── tests/                               // Test cases (optional)
+│   └── test_main.cpp
+│
+├── README.md                            // Project documentation
+├── Makefile                             // Build automation
+├── .gitignore                           // Git ignore file
+└── CMakeLists.txt                       // CMake build (optional)
+
+
+
+
+
+
+UML Class Diagram
+
+
+
+@startuml MalwareAnalysisSimulator
+
+' Core Classes
+class FileSample {
+  - string filePath
+  - string fileName
+  - string extension
+  - long fileSize
+  - vector<string> extractedStrings
+  - {static} int totalFilesAnalyzed
+  - {static} long totalBytesProcessed
+  + FileSample(string path)
+  + FileSample(const FileSample& other)
+  + ~FileSample()
+  + load() : void
+  + extractStrings() : void
+  + getFileName() const : string
+  + getFileSize() const : long
+  + {static} getTotalFilesAnalyzed() : int
+  + {static} incrementAnalyzedCount() : void
+}
+
+class AnalysisResult {
+  - int riskScore
+  - vector<string> findings
+  - string verdict
+  - string hashValue
+  - string timestamp
+  + AnalysisResult()
+  + addFinding(string) : void
+  + setRiskScore(int) : void
+  + calculateVerdict() : void
+  + getRiskScore() const : int
+  + getVerdict() const : string
+  + operator+=(const string&) : AnalysisResult&
+  + operator>(const AnalysisResult&) const : bool
+}
+
+' Friend function relationship
+AnalysisResult ..> "<<friend>>" ReportGenerator : operator
+
+' Template Class
+class "History<T>" as History {
+  - vector<T> records
+  - int maxSize
+  + History(int max)
+  + add(const T&) : void
+  + get(int index) const : T
+  + getAll() const : vector<T>
+  + clear() : void
+  + size() const : int
+}
+
+' Abstract Analyzer
+abstract class Analyzer {
+  # string analyzerName
+  # {static} vector<string> SUSPICIOUS_KEYWORDS
+  + {abstract} analyze(FileSample&, AnalysisResult&) : void
+  + {abstract} getName() const : string
+  + {abstract} ~Analyzer()
+}
+
+' Concrete Analyzers
+class HashAnalyzer {
+  - string hashAlgorithm
+  + analyze(FileSample&, AnalysisResult&) : void
+  + getName() const : string
+  + computeHash(const string&) : string
+}
+
+class StringAnalyzer {
+  - vector<string> suspiciousPatterns
+  + analyze(FileSample&, AnalysisResult&) : void
+  + getName() const : string
+  + loadPatterns() : void
+}
+
+class SignatureAnalyzer {
+  - map<string, int> signatureDatabase
+  + analyze(FileSample&, AnalysisResult&) : void
+  + getName() const : string
+  + loadSignatures() : void
+  + matchSignature(const string&) : bool
+}
+
+class MetadataAnalyzer {
+  - vector<string> dangerousExtensions
+  + analyze(FileSample&, AnalysisResult&) : void
+  + getName() const : string
+  + checkExtension(const string&) : bool
+}
+
+' Strategy Pattern for Scoring
+abstract class ScoringStrategy {
+  + {abstract} calculateScore(const AnalysisResult&) : int
+  + {abstract} ~ScoringStrategy()
+}
+
+class BasicScoring {
+  + calculateScore(const AnalysisResult&) : int
+}
+
+class AdvancedScoring {
+  + calculateScore(const AnalysisResult&) : int
+}
+
+class RiskScorer {
+  - ScoringStrategy* strategy
+  - int maxScore
+  + RiskScorer()
+  + setStrategy(ScoringStrategy*) : void
+  + calculateFinalScore(AnalysisResult&) : int
+  + getVerdict(int score) : string
+}
+
+' Analysis Engine (Orchestrator)
+class AnalysisEngine {
+  - vector<Analyzer*> analyzers
+  - RiskScorer* riskScorer
+  - ReportGenerator* reportGen
+  - Logger* logger
+  + AnalysisEngine()
+  + ~AnalysisEngine()
+  + addAnalyzer(Analyzer*) : void
+  + runAnalysis(FileSample&) : AnalysisResult
+  + setRiskScorer(RiskScorer*) : void
+}
+
+' Reporting
+class ReportGenerator {
+  - Logger* logger
+  - string reportDirectory
+  + ReportGenerator(const string&)
+  + generateReport(const AnalysisResult&, const FileSample&) : void
+  + saveToFile(const string&) : bool
+  + friend operator<<(ostream&, const AnalysisResult&) : ostream&
+}
+
+class Logger {
+  - string logFilePath
+  - ofstream logStream
+  - {static} int totalLogs
+  + Logger(const string&)
+  + ~Logger()
+  + log(const string&, const string&) : void
+  + logAnalysis(const FileSample&, const AnalysisResult&) : void
+  + {static} getTotalLogs() : int
+}
+
+' Security
+class User {
+  - string username
+  - string password
+  - string role
+  - History<AnalysisResult>* analysisHistory
+  - int analysisCount
+  + User(string, string, string)
+  + ~User()
+  + authenticate(const string&) : bool
+  + getUsername() const : string
+  + getRole() const : string
+  + addToHistory(const AnalysisResult&) : void
+  + getHistory() const : vector<AnalysisResult>
+}
+
+class AuthenticationManager {
+  - map<string, User*> users
+  - User* currentUser
+  - Logger* logger
+  + AuthenticationManager(Logger*)
+  + ~AuthenticationManager()
+  + login(const string&, const string&) : bool
+  + logout() : void
+  + getCurrentUser() const : User*
+  + loadUsers() : void
+}
+
+class QuarantineManager {
+  - vector<string> quarantinedFiles
+  - Logger* logger
+  - string quarantineLogPath
+  + QuarantineManager(Logger*)
+  + quarantine(const FileSample&) : void
+  + removeFromQuarantine(const string&) : bool
+  + listQuarantined() const : vector<string>
+  + isQuarantined(const string&) const : bool
+}
+
+' Configuration (Singleton)
+class ConfigurationManager {
+  - {static} ConfigurationManager* instance
+  - int maxRiskScore
+  - vector<string> suspiciousExtensions
+  - ConfigurationManager()
+  + {static} getInstance() : ConfigurationManager*
+  + getMaxRiskScore() const : int
+  + getSuspiciousExtensions() const : vector<string>
+  + loadConfiguration() : void
+}
+
+' UI
+class MenuSystem {
+  - AnalysisEngine* engine
+  - AuthenticationManager* authManager
+  - QuarantineManager* quarantineManager
+  + MenuSystem()
+  + ~MenuSystem()
+  + displayMainMenu() : void
+  + displayAnalysisMenu() : void
+  + run() : void
+}
+
+' Custom Exceptions
+class AnalyzerException {
+  # string message
+  + AnalyzerException(const string&)
+  + what() const : const char*
+}
+
+class FileOpenException {
+  + FileOpenException(const string&)
+}
+
+class InvalidFileException {
+  + InvalidFileException(const string&)
+}
+
+class AuthenticationException {
+  + AuthenticationException(const string&)
+}
+
+class QuarantineException {
+  + QuarantineException(const string&)
+}
+
+' ==================== RELATIONSHIPS ====================
+
+' Inheritance (Generalization)
+Analyzer <|-- HashAnalyzer : extends
+Analyzer <|-- StringAnalyzer : extends
+Analyzer <|-- SignatureAnalyzer : extends
+Analyzer <|-- MetadataAnalyzer : extends
+
+ScoringStrategy <|-- BasicScoring : extends
+ScoringStrategy <|-- AdvancedScoring : extends
+
+exception <|-- AnalyzerException : extends
+AnalyzerException <|-- FileOpenException : extends
+AnalyzerException <|-- InvalidFileException : extends
+AnalyzerException <|-- AuthenticationException : extends
+AnalyzerException <|-- QuarantineException : extends
+
+' Composition (Strong ownership)
+AnalysisEngine *-- "0..*" Analyzer : owns
+AnalysisEngine *-- RiskScorer : owns
+AnalysisEngine *-- ReportGenerator : owns
+ReportGenerator *-- Logger : owns
+User *-- "1" History : owns
+
+' Aggregation (Weak reference)
+AnalysisEngine o-- Logger : uses
+RiskScorer o-- ScoringStrategy : uses
+AuthenticationManager o-- "0..*" User : manages
+AuthenticationManager o-- Logger : uses
+QuarantineManager o-- Logger : uses
+
+' Association (Uses)
+AnalysisEngine ..> FileSample : analyzes
+AnalysisEngine ..> AnalysisResult : produces
+Analyzer ..> FileSample : reads
+Analyzer ..> AnalysisResult : updates
+RiskScorer ..> AnalysisResult : scores
+ReportGenerator ..> AnalysisResult : generates
+ReportGenerator ..> FileSample : reports on
+QuarantineManager ..> FileSample : quarantines
+MenuSystem ..> AnalysisEngine : controls
+MenuSystem ..> AuthenticationManager : uses
+MenuSystem ..> QuarantineManager : uses
+
+' Template instantiation
+History ..> AnalysisResult : <<bind>> T→AnalysisResult
+
+' Notes
+note right of History
+  **Template Class**
+  Demonstrates generic
+  programming
+end note
+
+note right of Analyzer
+  **Abstract Base Class**
+  Pure virtual analyze()
+  Demonstrates polymorphism
+end note
+
+note bottom of ConfigurationManager
+  **Singleton Pattern**
+  Static instance member
+end note
+
+note left of ReportGenerator
+  **Friend Function**
+  operator<< can access
+  private members of
+  AnalysisResult
+end note
+
+@enduml
+
+
+
+
+4. Relationship Summary
+Relationship TypeClasses InvolvedDemonstratesInheritanceAnalyzer → HashAnalyzer, StringAnalyzer, SignatureAnalyzer, MetadataAnalyzerPolymorphism, Virtual functionsInheritanceScoringStrategy → BasicScoring, AdvancedScoringStrategy Pattern, AbstractionInheritanceexception → AnalyzerException → specific exceptionsException HierarchyCompositionAnalysisEngine owns Analyzer[], RiskScorer, ReportGeneratorStrong ownership, Lifecycle dependencyCompositionReportGenerator owns LoggerStrong ownershipCompositionUser owns History<AnalysisResult>Template instantiation, OwnershipAggregationAnalysisEngine uses LoggerWeak reference, Shared resourceAggregationRiskScorer uses ScoringStrategyStrategy pattern, Pluggable behaviorAggregationAuthenticationManager manages User[]Weak reference, Shared managementAssociationAnalyzer uses FileSample, AnalysisResultParameter passing, Loose couplingFriendReportGenerator friend of AnalysisResultOperator overloading, Privileged accessTemplateHistory<T> bound to AnalysisResultGeneric programmingSingletonConfigurationManagerStatic member, Design pattern
+
+5. Course Concepts Mapped to Implementation
+OOP ConceptImplementation LocationDemonstrationClasses & ObjectsAll 20+ classesFundamental OOPEncapsulationPrivate members in all classesData hidingInheritanceAnalyzer hierarchy, ScoringStrategy hierarchy, Exception hierarchyCode reuse, IS-A relationshipPolymorphismVirtual analyze() in AnalyzerRuntime binding, Virtual functionsAbstractionPure virtual functions in Analyzer, ScoringStrategyInterface definitionCompositionAnalysisEngine owns analyzersStrong ownership, HAS-AAggregationAnalysisEngine uses LoggerWeak reference, USES-AFriend Functionsoperator<< in ReportGeneratorPrivileged accessStatic MemberstotalFilesAnalyzed in FileSample, instance in ConfigurationManagerShared state, SingletonTemplatesHistory<T> class, utility functionsGeneric programmingException HandlingCustom exception hierarchyError handlingFile I/OLogger, ReportGenerator, data loadingStream operationsOperator Overloadingoperator<<, operator+=, operator>Custom operatorsCopy ConstructorFileSample(const FileSample&)Deep copyingDestructorVirtual destructors in base classesResource cleanupConst CorrectnessConst methods throughoutImmutability guarantees
+
+6. Recommendations for Academic Excellence
+For High Grades (90%+)
+
+Documentation Quality
+
+Add Doxygen-style comments to all headers
+Include complexity analysis in comments
+Document which OOP concept each class demonstrates
+
+
+Code Quality
+
+Follow Google C++ Style Guide
+Use smart pointers (unique_ptr, shared_ptr) for modern C++
+Implement RAII (Resource Acquisition Is Initialization)
+
+
+Testing
+
+Add unit tests using a simple test framework
+Include edge case handling
+Document test coverage
+
+
+Advanced Features (Bonus Points)
+
+Add move semantics for efficiency
+Implement command pattern for undo functionality
+Add observer pattern for real-time analysis updates
+
+
+
+For Viva Preparation
+Be Ready to Explain:
+
+Why you chose composition vs aggregation for each relationship
+How polymorphism improves extensibility (adding new analyzers)
+Why templates are used for History<T>
+Exception safety guarantees in your code
+How the Strategy pattern makes scoring algorithms interchangeable
+Memory management strategy (who owns what)
+
+Sample Viva Questions:
+
+"What happens if we add a new analyzer?" → Show polymorphism in action
+"How does the friend function access private data?" → Explain operator<<
+"Why is Analyzer abstract?" → Discuss pure virtual functions
+"What's the advantage of the Singleton pattern here?" → Explain ConfigurationManager
+
+Portfolio Enhancement
+
+GitHub Repository Structure
+
+   - Clear README with setup instructions
+   - Screenshots of console output
+   - Sample analysis reports
+   - Architecture diagram (UML)
+   - Contributing guide
+
+Demo Script
+
+Prepare 5-minute demo showing all features
+Show both safe and malicious file analysis
+Demonstrate quarantine and reporting
+
+
+Presentation Slides (10-15 slides)
+
+Problem statement
+Architecture overview
+OOP concepts demonstration
+Code snippets (key polymorphism example)
+Results and conclusion
+
+
+
+
+7. Final Architecture Improvements Summary
+Added Concepts
+✅ Template Class (History<T>)
+✅ Strategy Pattern (ScoringStrategy)
+✅ Singleton Pattern (ConfigurationManager)
+✅ Operator Overloading (operator<<, operator+=, operator>)
+✅ Copy Constructor (in FileSample)
+✅ Enhanced Exception Hierarchy (base AnalyzerException)
+✅ Static Members (counters and shared data)
+✅ Const Correctness (throughout)
+Relationship Clarity
+
+Composition: AnalysisEngine ⊕ Analyzer[]
+Aggregation: AnalysisEngine ◇ Logger
+Association: Analyzer → FileSample
+Inheritance: Analyzer ← derived analyzers
+
+Estimated Metrics
+
+Total Classes: 22
+Total Files: ~50
+Lines of Code: 3,500-4,500
+Development Time: 4 weeks
+Grade Potential: 95%+
+
+This architecture is production-ready, academically comprehensive, and impressive for evaluation. It naturally demonstrates every major OOP concept while solving a real cybersecurity problem.
+Would you like me to generate specific files (e.g., header files, main.cpp, Makefile) to help you get started?
+
+
+

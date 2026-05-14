@@ -1,0 +1,56 @@
+============================================
+        MALWARE ANALYSIS REPORT
+============================================
+
+ANALYST INFORMATION
+-------------------------------------------
+Analyst:      admin
+Role:         Administrator
+Analysis Date: 2026-05-14 10:22:51
+Report Date:   2026-05-14 10:23:24
+
+FILE INFORMATION
+-------------------------------------------
+File Name:     suspicious_sample.txt
+File Path:     samples/suspicious_sample.txt
+File Size:     516 bytes
+File Extension: .txt
+File Hash:     53312314
+
+ANALYSIS RESULTS
+-------------------------------------------
+Risk Score:    70 / 100
+Verdict:       DANGEROUS
+Total Findings: 10
+
+DETAILED FINDINGS
+-------------------------------------------
+1. Hash computed: 53312314
+2. Suspicious string found: "- cmd.exe"
+3. Suspicious string found: "- powershell"
+4. Suspicious string found: "- registry"
+5. Suspicious string found: "- keylogger"
+6. Suspicious string found: "- download from http://malicious-site.com"
+7. Suspicious string found: "- socket connection"
+8. Suspicious string found: "- CreateRemoteThread API"
+9. No matching malware signatures found
+10. File extension: .txt (acceptable)
+
+RISK ASSESSMENT
+-------------------------------------------
+Risk Level: HIGH
+This file shows strong indicators of malicious behavior.
+
+RECOMMENDATIONS
+-------------------------------------------
+- DO NOT execute this file.
+- IMMEDIATELY quarantine the file.
+- Scan the system for additional malware.
+- Review system logs for signs of compromise.
+- Change passwords if sensitive data may be exposed.
+- Report to security team immediately.
+- Consider full system scan and restoration from backup.
+
+============================================
+        END OF REPORT
+============================================

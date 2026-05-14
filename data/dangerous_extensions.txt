@@ -1,0 +1,37 @@
+# dangerous_extensions.txt
+# TODO: Add content
+
+# Dangerous file extensions
+# Format: one extension per line (with or without leading dot)
+
+# Executables
+.exe
+.dll
+.sys
+.drv
+
+# Scripts
+.bat
+.cmd
+.vbs
+.vbe
+.js
+.jse
+.ps1
+.psm1
+
+# Office macros
+.docm
+.xlsm
+.pptm
+
+# Archives (can hide malware)
+.zip
+.rar
+.7z
+
+# Other dangerous
+.scr
+.pif
+.com
+.msi

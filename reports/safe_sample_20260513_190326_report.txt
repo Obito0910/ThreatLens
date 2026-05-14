@@ -1,0 +1,46 @@
+============================================
+        MALWARE ANALYSIS REPORT
+============================================
+
+ANALYST INFORMATION
+-------------------------------------------
+Analyst:      analyst
+Role:         Security Analyst
+Analysis Date: 2026-05-13 19:03:26
+Report Date:   2026-05-13 19:03:26
+
+FILE INFORMATION
+-------------------------------------------
+File Name:     safe_sample.txt
+File Path:     samples/safe_sample.txt
+File Size:     479 bytes
+File Extension: .txt
+File Hash:     249abcb5
+
+ANALYSIS RESULTS
+-------------------------------------------
+Risk Score:    0 / 100
+Verdict:       SAFE
+Total Findings: 4
+
+DETAILED FINDINGS
+-------------------------------------------
+1. Hash computed: 249abcb5
+2. No suspicious strings detected
+3. No matching malware signatures found
+4. File extension: .txt (acceptable)
+
+RISK ASSESSMENT
+-------------------------------------------
+Risk Level: LOW
+This file appears to be safe based on the analysis.
+
+RECOMMENDATIONS
+-------------------------------------------
+- File appears to be safe for use.
+- No immediate action required.
+- Continue regular security monitoring.
+
+============================================
+        END OF REPORT
+============================================

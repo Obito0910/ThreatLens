@@ -1,0 +1,13 @@
+# users.txt
+# TODO: Add content
+# User Database
+# Format: username,password,role
+# Lines starting with # are comments
+
+admin,admin123,Administrator
+Imad,password123,Senior Analyst
+zaeema,zaeema456,Junior Analyst
+haseeb,haseeb789,Analyst
+ahmad,ahmad,Analyst
+kashaf,kashaf987,Junior Analyst
+mujtaba,mujtaba654,Analyst

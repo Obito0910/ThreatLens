@@ -1,0 +1,24 @@
+# suspicious_sample.txt
+# TODO: Add content
+
+
+This is a suspicious sample file for testing.
+
+It contains some suspicious keywords like:
+- cmd.exe
+- powershell
+- registry
+- keylogger
+
+It also mentions network activities:
+- download from http://malicious-site.com
+- socket connection
+- CreateRemoteThread API
+
+Expected analysis result:
+- Extension: .txt (safe)
+- Suspicious strings: DETECTED
+- Risk score: Should be moderate (21-50)
+- Verdict: SUSPICIOUS
+
+This file is for testing purposes only.

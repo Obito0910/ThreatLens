@@ -1,0 +1,43 @@
+# suspicious_strings.txt
+# TODO: Add content
+
+# Suspicious strings database
+# Format: one keyword per line
+
+# System commands
+cmd.exe
+powershell
+regedit
+registry
+netsh
+taskkill
+
+# Malicious behavior
+keylogger
+ransomware
+backdoor
+trojan
+rootkit
+botnet
+cryptominer
+
+# Network activity
+download
+socket
+connect
+http://
+https://
+ftp://
+
+# Suspicious APIs
+CreateRemoteThread
+WriteProcessMemory
+VirtualAllocEx
+LoadLibrary
+GetProcAddress
+
+# Obfuscation indicators
+base64
+encode
+decrypt
+xor

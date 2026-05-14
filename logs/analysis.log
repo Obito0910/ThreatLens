@@ -1,0 +1,86 @@
+[2026-05-13 19:03:26] [INFO] Logger initialized: logs/analysis.log
+[2026-05-13 19:03:26] [INFO] User logged in: analyst
+
+========================================
+[2026-05-13 19:03:26] ANALYSIS COMPLETED
+========================================
+User:         analyst
+Role:         Security Analyst
+File:         safe_sample.txt
+Hash:         249abcb5
+Risk Score:   0/100
+Verdict:      SAFE
+Findings:     4
+Timestamp:    2026-05-13 19:03:26
+========================================
+
+[2026-05-13 19:03:26] [INFO] User logged out: analyst
+[2026-05-13 19:03:26] [INFO] Logger shutting down
+[2026-05-14 00:02:55] [INFO] Logger initialized: logs/analysis.log
+[2026-05-14 00:02:55] [INFO] System started
+[2026-05-14 00:03:51] [INFO] User logged in: john_doe
+
+========================================
+[2026-05-14 00:04:37] ANALYSIS COMPLETED
+========================================
+User:         john_doe
+Role:         Senior Analyst
+File:         suspicious_sample.txt
+Hash:         53312314
+Risk Score:   70/100
+Verdict:      DANGEROUS
+Findings:     10
+Timestamp:    2026-05-14 00:04:37
+========================================
+
+[2026-05-14 00:08:21] [INFO] User logged out: john_doe
+[2026-05-14 10:00:03] [INFO] Logger initialized: logs/analysis.log
+[2026-05-14 10:00:03] [INFO] System started
+[2026-05-14 10:00:20] [INFO] System shutting down
+[2026-05-14 10:00:20] [INFO] Logger shutting down
+[2026-05-14 10:15:07] [INFO] Logger initialized: logs/analysis.log
+[2026-05-14 10:15:07] [INFO] System started
+[2026-05-14 10:21:27] [INFO] Logger initialized: logs/analysis.log
+[2026-05-14 10:21:27] [INFO] System started
+[2026-05-14 10:21:43] [INFO] User logged in: admin
+
+========================================
+[2026-05-14 10:22:51] ANALYSIS COMPLETED
+========================================
+User:         admin
+Role:         Administrator
+File:         suspicious_sample.txt
+Hash:         53312314
+Risk Score:   70/100
+Verdict:      DANGEROUS
+Findings:     10
+Timestamp:    2026-05-14 10:22:51
+========================================
+
+[2026-05-14 10:28:27] [INFO] System shutting down
+[2026-05-14 10:28:27] [INFO] User logged out: admin
+[2026-05-14 10:28:27] [INFO] Logger shutting down
+[2026-05-14 10:28:39] [INFO] Logger initialized: logs/analysis.log
+[2026-05-14 10:28:39] [INFO] System started
+[2026-05-14 10:29:02] [INFO] User logged in: zaeema
+[2026-05-14 10:29:30] [INFO] System shutting down
+[2026-05-14 10:29:30] [INFO] User logged out: zaeema
+[2026-05-14 10:29:30] [INFO] Logger shutting down
+[2026-05-14 10:39:15] [INFO] Logger initialized: logs/analysis.log
+[2026-05-14 10:39:15] [INFO] System started
+[2026-05-14 10:48:49] [INFO] Logger initialized: logs/analysis.log
+[2026-05-14 10:48:49] [INFO] System started
+[2026-05-14 10:51:11] [INFO] Logger initialized: logs/analysis.log
+[2026-05-14 10:51:11] [INFO] System started
+[2026-05-14 10:54:51] [INFO] System shutting down
+[2026-05-14 10:54:51] [INFO] Logger shutting down
+[2026-05-14 10:55:31] [INFO] Logger initialized: logs/analysis.log
+[2026-05-14 10:55:31] [INFO] System started
+[2026-05-14 10:58:04] [INFO] System shutting down
+[2026-05-14 10:58:04] [INFO] Logger shutting down
+[2026-05-14 10:58:27] [INFO] Logger initialized: logs/analysis.log
+[2026-05-14 10:58:27] [INFO] System started
+[2026-05-14 10:59:20] [INFO] User logged in: zaeema
+[2026-05-14 10:59:31] [INFO] System shutting down
+[2026-05-14 10:59:31] [INFO] User logged out: zaeema
+[2026-05-14 10:59:31] [INFO] Logger shutting down
