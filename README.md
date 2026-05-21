@@ -117,9 +117,7 @@ Role:      Senior Analyst
 |----------|----------|------|
 | `admin` | `admin123` | Administrator |
 | `john_doe` | `password123` | Senior Analyst |
-| `alice` | `alice456` | Analyst |
-| `bob` | `bob789` | Junior Analyst |
-| `test_user` | `test` | Analyst |
+
 
 ---
 
